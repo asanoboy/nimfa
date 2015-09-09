@@ -449,7 +449,7 @@ def _svd_left(X):
     """
     XtX = dot(X.T, X)
     if X.shape[1] > 1:
-        if '0.9' in scipy.version.version or '0.10' in scipy.version.version or '0.11' in scipy.version.version:
+        if True or '0.9' in scipy.version.version or '0.10' in scipy.version.version or '0.11' in scipy.version.version:
             # In scipy 0.9.0 ARPACK interface has changed. eigen_symmetric
             # routine was renamed to eigsh
             # http://docs.scipy.org/doc/scipy/reference/release.0.9.0.html#scipy-sparse

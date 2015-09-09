@@ -152,6 +152,7 @@ class Snmf(nmf_std.Nmf_std):
                  rank=30, max_iter=30, min_residuals=1e-5, test_conv=None,
                  n_run=1, callback=None, callback_init=None, track_factor=False,
                  track_error=False, version='r', eta=None, beta=1e-4,
+                 Track=mf_track.Mf_track,
                  i_conv=10, w_min_change=0, **options):
         self.name = "snmf"
         self.aseeds = ["random", "fixed", "nndsvd", "random_c", "random_vcol"]
@@ -161,7 +162,7 @@ class Snmf(nmf_std.Nmf_std):
         if self.eta < 0:
             self.eta = np.max(self.V) if not sp.isspmatrix(self.V) else 0.
         self.min_residuals = 1e-4 if not self.min_residuals else self.min_residuals
-        self.tracker = mf_track.Mf_track() if self.track_factor and self.n_run > 1 \
+        self.tracker = Track() if self.track_factor and self.n_run > 1 \
                                               or self.track_error else None
 
     def factorize(self):
