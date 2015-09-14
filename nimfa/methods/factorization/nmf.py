@@ -156,6 +156,7 @@ class Nmf(nmf_std.Nmf_std):
     def __init__(self, V, seed=None, W=None, H=None, rank=30, max_iter=30,
                  min_residuals=1e-5, test_conv=None, n_run=1, callback=None,
                  callback_init=None, track_factor=False, track_error=False,
+                 Track=mf_track.Mf_track,
                  update='euclidean', objective='fro', conn_change=30, **options):
         self.name = "nmf"
         self.aseeds = ["random", "fixed", "nndsvd", "random_c", "random_vcol"]
@@ -165,7 +166,7 @@ class Nmf(nmf_std.Nmf_std):
         self._conn_change = 0
         self.update = getattr(self, self.update)
         self.objective = getattr(self, self.objective)
-        self.tracker = mf_track.Mf_track() if self.track_factor and self.n_run > 1 \
+        self.tracker = Track() if self.track_factor and self.n_run > 1 \
                                               or self.track_error else None
 
     def factorize(self):
